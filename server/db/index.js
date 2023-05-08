@@ -1,24 +1,27 @@
-const conn = require('./conn');
-const User = require('./User');
+const conn = require("./conn");
+const User = require("./User");
+const Stock = require("./Stock");
 
-const syncAndSeed = async()=> {
+Stock.belongsTo(User);
+User.hasMany(Stock);
+
+const syncAndSeed = async () => {
   await conn.sync({ force: true });
   const [moe, lucy, larry, ethyl] = await Promise.all([
-    User.create({ username: 'moe', password: '123'}),
-    User.create({ username: 'lucy', password: '123' }),
-    User.create({ username: 'larry', password: '123' }),
-    User.create({ username: 'ethyl', password: '123' }),
+    User.create({ username: "moe", password: "123" }),
+    User.create({ username: "lucy", password: "123" }),
+    User.create({ username: "larry", password: "123" }),
+    User.create({ username: "ethyl", password: "123" }),
   ]);
 
   return {
     users: {
       moe,
       lucy,
-      larry
-    }
+      larry,
+    },
   };
 };
-
 
 module.exports = {
   syncAndSeed,
