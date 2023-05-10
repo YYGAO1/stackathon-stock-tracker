@@ -19,6 +19,7 @@ const syncAndSeed = async () => {
       moe,
       lucy,
       larry,
+      ethyl,
     },
   };
 };
@@ -26,4 +27,5 @@ const syncAndSeed = async () => {
 module.exports = {
   syncAndSeed,
   User,
+  Stock,
 };

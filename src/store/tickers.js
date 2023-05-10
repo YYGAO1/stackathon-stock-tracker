@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_KEY } from "../secrets";
+import { POLYGON_API_KEY } from "../secrets";
 
 const tickers = (state = [], action) => {
   if (action.type === "FETCH_TICKERS") {
@@ -8,20 +8,15 @@ const tickers = (state = [], action) => {
   return state;
 };
 
-export const ticker = (state = [], action) => {
-  if (action.type === "FETCH_TICKER") {
-    return action.ticker;
-  }
-  return state;
+const header = {
+  headers: { Authorization: `Bearer ${POLYGON_API_KEY}` },
 };
 
 export const fetchTickers = () => {
   return async (dispatch) => {
     const response = await axios.get(
       "https://api.polygon.io/v3/reference/tickers",
-      {
-        headers: { Authorization: `Bearer ${API_KEY}` },
-      }
+      header
     );
     dispatch({ type: "FETCH_TICKERS", tickers: response.data });
   };
@@ -29,22 +24,8 @@ export const fetchTickers = () => {
 
 export const fetchNextPage = (nextPage) => {
   return async (dispatch) => {
-    const response = await axios.get(nextPage, {
-      headers: { Authorization: `Bearer ${API_KEY}` },
-    });
+    const response = await axios.get(nextPage, header);
     dispatch({ type: "FETCH_TICKERS", tickers: response.data });
-  };
-};
-
-export const fetchTicker = (_ticker) => {
-  return async (dispatch) => {
-    const response = await axios.get(
-      `https://api.polygon.io/v3/reference/tickers/${_ticker}`,
-      {
-        headers: { Authorization: `Bearer ${API_KEY}` },
-      }
-    );
-    dispatch({ type: "FETCH_TICKER", ticker: response.data });
   };
 };
 

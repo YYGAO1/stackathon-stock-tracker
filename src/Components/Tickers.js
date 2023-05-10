@@ -1,7 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { fetchNextPage, fetchTicker, fetchTickers } from "../store";
+import {
+  addToWatchList,
+  fetchNextPage,
+  fetchStockQuotes,
+  fetchTicker,
+  fetchTickers,
+} from "../store";
 
 const Tickers = () => {
   const { tickers } = useSelector((state) => state);
@@ -18,9 +24,15 @@ const Tickers = () => {
     await dispatch(fetchNextPage(nextPage));
     navigate(`/tickers/pg/${num * 1 + 1}`);
   };
-  const getTicker = async (ticker) => {
-    await dispatch(fetchTicker(ticker));
-    navigate(`/tickers/${ticker}`);
+
+  const getTicker = async (stocksTicker) => {
+    await dispatch(fetchTicker(stocksTicker));
+    await dispatch(fetchStockQuotes(stocksTicker));
+    // navigate(`/tickers/${stocksTicker}`);
+  };
+
+  const addToList = async (stock) => {
+    await dispatch(addToWatchList(stock));
   };
 
   return (
@@ -34,9 +46,12 @@ const Tickers = () => {
                     to={`/tickers/${stock.ticker}`}
                     onClick={() => getTicker(stock.ticker)}
                   >
-                    {stock.name} <button>add to watchlist</button>
+                    {stock.name}{" "}
                   </Link>{" "}
-                  ({stock.ticker})
+                  ({stock.ticker}){" "}
+                  <button onClick={() => addToList(stock)}>
+                    Add to WatchList
+                  </button>
                 </li>
               );
             })
