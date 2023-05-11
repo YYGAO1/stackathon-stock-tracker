@@ -72,6 +72,11 @@ const Ticker = () => {
                   </a>
                   <ul>
                     <li key={article.author}> ({article.author})</li>
+                    <li key={article.published_utc}>
+                      {new Date(
+                        Date.parse(article.published_utc)
+                      ).toLocaleString()}
+                    </li>
                     <li key={article.description}>
                       {article.description ? article.description : ""}
                     </li>
