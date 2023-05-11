@@ -9,10 +9,12 @@ import {
   fetchStockQuotes,
   fetchWatchlist,
 } from "../store";
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import { Link, Route, Routes, useNavigate, useParams } from "react-router-dom";
 import Tickers from "./Tickers";
 import Ticker from "./Ticker";
 import Watchlist from "./Watchlist";
+import Trending from "./TrendingStock";
+import { fetchTickerNews } from "../store/news";
 
 const App = () => {
   const { auth } = useSelector((state) => state);
@@ -30,6 +32,8 @@ const App = () => {
   const getTicker = async (stocksTicker) => {
     await dispatch(fetchTicker(stocksTicker));
     await dispatch(fetchStockQuotes(stocksTicker));
+    await dispatch(fetchTickerNews(stocksTicker));
+
     navigate(`/tickers/${stocksTicker}`);
     setTicker("");
   };
@@ -50,7 +54,14 @@ const App = () => {
           <Link to={"/signup"}>Sign Up</Link>
         </>
       )}
-
+      <span className="searchTicker">
+        <input
+          placeholder="ticker"
+          value={stocksTicker}
+          onChange={(ev) => setTicker(ev.target.value.toUpperCase())}
+        />
+        <button onClick={() => getTicker(stocksTicker)}>Enter</button>
+      </span>
       {
         <div>
           <nav>
@@ -64,14 +75,10 @@ const App = () => {
             </Link>{" "}
             {!!auth.id && <Link to={"/watchlist"}>Watchlist</Link>}
           </nav>
-          <input
-            placeholder="ticker"
-            value={stocksTicker}
-            onChange={(ev) => setTicker(ev.target.value.toUpperCase())}
-          />
-          <button onClick={() => getTicker(stocksTicker)}>Enter</button>
+
           <Routes>
             {" "}
+            <Route path="/" element={<Trending />} />
             <Route path="/:account" element={<Login />} />
             {/* <Route path="/signup" element={<Login />} /> */}
             <Route path="/watchlist" element={<Watchlist />} />

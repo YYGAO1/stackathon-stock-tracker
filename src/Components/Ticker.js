@@ -4,19 +4,21 @@ import { Link, useParams } from "react-router-dom";
 import { addToWatchList, fetchStockQuotes, fetchTicker } from "../store";
 
 const Ticker = () => {
-  const { ticker, stockData } = useSelector((state) => state);
+  const { ticker, stockData, news } = useSelector((state) => state);
   const { stocksTicker } = useParams();
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchTicker(stocksTicker));
-    dispatch(fetchStockQuotes(stocksTicker));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchTicker(stocksTicker));
+  //   dispatch(fetchStockQuotes(stocksTicker));
+  //   dispatch(fetchTickerNews(stocksTicker));
+  // }, []);
 
   const tickerData = ticker.results ? ticker.results : "";
   const address = tickerData.address ? tickerData.address : "";
   const _stockData = stockData ? stockData : null;
+  const stockNews = news.results;
 
   const addToList = async (stock) => {
     await dispatch(addToWatchList(stock));
@@ -58,6 +60,28 @@ const Ticker = () => {
         )}
       </div>
       <p>{tickerData.description}</p>
+      <h3>Recent News</h3>
+      <div>
+        <ul>
+          {stockNews ? (
+            stockNews.map((article) => {
+              return (
+                <li key={article.id}>
+                  <a href={article.article_url}>{article.title}</a>
+                  <ul>
+                    <li key={article.author}> ({article.author})</li>
+                    <li key={article.description}>
+                      {article.description ? article.description : ""}
+                    </li>
+                  </ul>
+                </li>
+              );
+            })
+          ) : (
+            <p>"no news yet!"</p>
+          )}
+        </ul>
+      </div>
     </>
   );
 };

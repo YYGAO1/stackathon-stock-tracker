@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { attemptLogin, register } from "../store";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import InputForm from "./Input";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const Login = () => {
 
   return (
     <div>
-      <h2>Login</h2>
+      <h2>{account === "login" ? "Login" : "Sign Up"}</h2>
       <form onSubmit={account === "login" ? login : signup}>
         <input
           placeholder="username"
@@ -47,7 +48,7 @@ const Login = () => {
           value={credentials.password}
           onChange={onChange}
         />
-        <button>Login</button>
+        <button>{account === "login" ? "Login" : "Sign Up"}</button>
       </form>
     </div>
   );

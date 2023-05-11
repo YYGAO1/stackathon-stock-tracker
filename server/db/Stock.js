@@ -1,4 +1,4 @@
-const { UUID, UUIDV4, STRING } = require("sequelize");
+const { UUID, UUIDV4, STRING, ENUM } = require("sequelize");
 const conn = require("./conn");
 
 const Stock = conn.define("stock", {
@@ -14,6 +14,10 @@ const Stock = conn.define("stock", {
   name: {
     type: STRING,
     allowNull: false,
+  },
+  category: {
+    type: ENUM("INTERESTED", "OWN"),
+    defaultValue: "INTERESTED",
   },
 });
 

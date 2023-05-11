@@ -8,6 +8,7 @@ import {
   fetchTicker,
   fetchTickers,
 } from "../store";
+import { fetchTickerNews } from "../store/news";
 
 const Tickers = () => {
   const { tickers } = useSelector((state) => state);
@@ -28,6 +29,8 @@ const Tickers = () => {
   const getTicker = async (stocksTicker) => {
     await dispatch(fetchTicker(stocksTicker));
     await dispatch(fetchStockQuotes(stocksTicker));
+    await dispatch(fetchTickerNews(stocksTicker));
+
     // navigate(`/tickers/${stocksTicker}`);
   };
 
