@@ -1,5 +1,5 @@
 import axios from "axios";
-import { STOCKDATA_API_KEY } from "../secrets";
+import { STOCKDATA_API_KEY } from "../../secrets";
 
 const stockData = (state = [], action) => {
   if (action.type === "FETCH_STOCK_QUOTE") {

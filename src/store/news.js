@@ -1,5 +1,5 @@
 import axios from "axios";
-import { POLYGON_API_KEY } from "../secrets";
+import { POLYGON_API_KEY } from "../../secrets";
 
 const news = (state = [], action) => {
   if (action.type === "FETCH_NEWS") {
