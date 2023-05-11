@@ -46,6 +46,7 @@ const Tickers = () => {
               return (
                 <li key={stock.ticker}>
                   <Link
+                    className="tickerLink"
                     to={`/tickers/${stock.ticker}`}
                     onClick={() => getTicker(stock.ticker)}
                   >

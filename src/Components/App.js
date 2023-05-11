@@ -8,13 +8,16 @@ import {
   loginWithToken,
   fetchStockQuotes,
   fetchWatchlist,
+  fetchTickerNews,
 } from "../store";
 import { Link, Route, Routes, useNavigate, useParams } from "react-router-dom";
 import Tickers from "./Tickers";
 import Ticker from "./Ticker";
 import Watchlist from "./Watchlist";
 import Trending from "./TrendingStock";
-import { fetchTickerNews } from "../store/news";
+import UpdateAcc from "./UpdateAcc";
+import ProfileMenu from "./ProfileMenu";
+import Profile from "./Profile";
 
 const App = () => {
   const { auth } = useSelector((state) => state);
@@ -45,23 +48,21 @@ const App = () => {
 
   return (
     <div>
-      <h1>Diamond Hands</h1>
+      <h1>HODL</h1>
       {auth.id ? (
         <Home />
       ) : (
         <>
-          <Link to={"/login"}> Login</Link> <span>or</span>{" "}
-          <Link to={"/signup"}>Sign Up</Link>
+          <Link to={"/login"} className="tickerLink">
+            {" "}
+            Login
+          </Link>{" "}
+          <span>or</span>{" "}
+          <Link to={"/signup"} className="tickerLink">
+            Sign Up
+          </Link>
         </>
       )}
-      <span className="searchTicker">
-        <input
-          placeholder="ticker"
-          value={stocksTicker}
-          onChange={(ev) => setTicker(ev.target.value.toUpperCase())}
-        />
-        <button onClick={() => getTicker(stocksTicker)}>Enter</button>
-      </span>
       {
         <div>
           <nav>
@@ -74,6 +75,14 @@ const App = () => {
               Stocks
             </Link>{" "}
             {!!auth.id && <Link to={"/watchlist"}>Watchlist</Link>}
+            <span className="searchTicker">
+              <input
+                placeholder="ticker"
+                value={stocksTicker}
+                onChange={(ev) => setTicker(ev.target.value.toUpperCase())}
+              />
+              <button onClick={() => getTicker(stocksTicker)}>Enter</button>
+            </span>
           </nav>
 
           <Routes>
@@ -84,6 +93,8 @@ const App = () => {
             <Route path="/watchlist" element={<Watchlist />} />
             <Route path="/tickers/pg/:num" element={<Tickers />} />
             <Route path="/tickers/:stocksTicker" element={<Ticker />} />
+            <Route path="/update" element={<UpdateAcc />} />
+            <Route path="/users/:authId" element={<Profile />} />
           </Routes>
         </div>
       }

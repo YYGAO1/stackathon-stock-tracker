@@ -50,6 +50,9 @@ const User = conn.define("user", {
       return `${prefix}${data}`;
     },
   },
+  about: {
+    type: TEXT,
+  },
 });
 
 // User.prototype.createOrder = async function () {

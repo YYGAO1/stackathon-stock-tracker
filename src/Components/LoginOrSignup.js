@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { attemptLogin, register } from "../store";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import InputForm from "./Input";
 
 const Login = () => {
   const dispatch = useDispatch();

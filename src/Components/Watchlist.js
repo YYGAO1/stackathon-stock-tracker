@@ -19,7 +19,9 @@ const Watchlist = () => {
           return (
             <li key={stock.ticker}>
               {stock.name}{" "}
-              <Link to={`/tickers/${stock.ticker}`}>({stock.ticker})</Link>
+              <Link className="tickerLink" to={`/tickers/${stock.ticker}`}>
+                ({stock.ticker})
+              </Link>
             </li>
           );
         })}

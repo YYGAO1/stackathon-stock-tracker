@@ -2,6 +2,19 @@
   font-family: "Barlow";
   text-align: center;
 }
+.tickerLink {
+  color: black;
+}
+
+.tickerLink:hover,
+a {
+  color: #bf9460;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
 
 body {
   font-family: verdana;
@@ -19,9 +32,11 @@ form > * {
 nav {
   display: flex;
   justify-content: space-around;
+  background-color: #187fd9;
 }
 
-.searchTicker {
+.searchTicker,
+.profileMenu {
   display: flex;
   flex-direction: row;
   justify-content: end;
