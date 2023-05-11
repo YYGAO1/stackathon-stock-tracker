@@ -27,8 +27,13 @@ const App = () => {
   useEffect(() => {
     dispatch(loginWithToken());
     dispatch(fetchTickers());
-    dispatch(fetchWatchlist());
   }, []);
+
+  useEffect(() => {
+    if (auth.id) {
+      dispatch(fetchWatchlist());
+    }
+  }, [auth]);
 
   const [stocksTicker, setTicker] = useState("");
 

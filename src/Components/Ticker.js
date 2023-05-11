@@ -67,7 +67,9 @@ const Ticker = () => {
             stockNews.map((article) => {
               return (
                 <li key={article.id}>
-                  <a href={article.article_url}>{article.title}</a>
+                  <a href={article.article_url} className="tickerLink">
+                    {article.title}
+                  </a>
                   <ul>
                     <li key={article.author}> ({article.author})</li>
                     <li key={article.description}>

@@ -21,4 +21,13 @@ app.post("/", isLoggedIn, async (req, res, next) => {
   }
 });
 
+app.put("/:id", isLoggedIn, async (req, res, next) => {
+  try {
+    const user = req.user;
+    res.send(await user.removeFromWatchList(req.body));
+  } catch (ex) {
+    next(ex);
+  }
+});
+
 module.exports = app;

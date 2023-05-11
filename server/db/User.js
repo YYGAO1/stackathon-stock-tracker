@@ -88,6 +88,19 @@ User.prototype.getWatchlist = async function () {
   return watchlist;
 };
 
+User.prototype.removeFromWatchList = async function (_stock) {
+  let stock = await conn.models.stock.findOne({
+    where: {
+      userId: this.id,
+      ticker: _stock.ticker,
+    },
+  });
+  if (stock) {
+    await stock.destroy();
+  }
+  return stock;
+};
+
 // User.prototype.addToCart = async function ({ product, quantity }) {
 //   const cart = await this.getCart();
 //   let lineItem = cart.lineItems.find((lineItem) => {

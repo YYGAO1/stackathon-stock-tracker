@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchWatchlist } from "../store";
-import { Link } from "react-router-dom";
+import { fetchWatchlist, removeFromWatchList } from "../store";
+import { Link, useNavigate } from "react-router-dom";
 
 const Watchlist = () => {
   const { stocks, stockData } = useSelector((state) => state);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(fetchWatchlist());
-  }, []);
+  const remove = (stock) => {
+    dispatch(removeFromWatchList(stock));
+    navigate("/watchlist");
+  };
 
   return (
     <>
@@ -21,7 +23,8 @@ const Watchlist = () => {
               {stock.name}{" "}
               <Link className="tickerLink" to={`/tickers/${stock.ticker}`}>
                 ({stock.ticker})
-              </Link>
+              </Link>{" "}
+              <button onClick={() => remove(stock)}>x</button>
             </li>
           );
         })}
