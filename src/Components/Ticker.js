@@ -2,6 +2,8 @@ import React, { useEffect, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { addToWatchList, fetchStockQuotes, fetchTicker } from "../store";
+import StockChart from "./StockChart";
+import dayjs from "dayjs";
 
 const Ticker = () => {
   const { ticker, stockData, news } = useSelector((state) => state);
@@ -31,7 +33,9 @@ const Ticker = () => {
       {tickerData.homepage_url ? (
         <h1>
           {/* {tickerData.branding.icon_url} */}
-          <a href={`${tickerData.homepage_url}`}>{tickerData.name}</a>
+          <a href={`${tickerData.homepage_url}`} className="tickerLink">
+            {tickerData.name}
+          </a>
         </h1>
       ) : (
         <h1>{tickerData.name}</h1>
@@ -59,6 +63,7 @@ const Ticker = () => {
           "no address available"
         )}
       </div>
+      <StockChart stocksTicker={tickerData.ticker} />
       <p>{tickerData.description}</p>
       <h3>Recent News</h3>
       <div>
@@ -73,9 +78,12 @@ const Ticker = () => {
                   <ul>
                     <li key={article.author}> ({article.author})</li>
                     <li key={article.published_utc}>
-                      {new Date(
+                      {/* {new Date(
                         Date.parse(article.published_utc)
-                      ).toLocaleString()}
+                      ).toLocaleString()} */}
+                      {dayjs(article.published_utc).format(
+                        "MM-DD-YYYY hh:mm a"
+                      )}
                     </li>
                     <li key={article.description}>
                       {article.description ? article.description : ""}

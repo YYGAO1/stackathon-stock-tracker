@@ -22,6 +22,7 @@ export const fetchTicker = (ticker) => {
   };
 };
 
+
 // export const fetchDailyOpenClose = () => {
 //   return async (dispatch) => {
 //     const response = await axios.get(

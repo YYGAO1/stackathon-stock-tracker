@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateAuth } from "../store";
+import { useNavigate } from "react-router-dom";
 
 const UpdateAcc = () => {
   const { auth } = useSelector((state) => state);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [account, setAccount] = useState({
     username: "",
@@ -11,24 +16,25 @@ const UpdateAcc = () => {
     about: "",
   });
 
-  console.log(auth);
-
   useEffect(() => {
     if (auth) {
       setAccount({
         username: auth.username,
+        password: auth.password,
         about: auth.about,
       });
     }
   }, [auth]);
 
-  console.log({ ...account });
-
   const onChange = (ev) => {
     setAccount({ ...account, [ev.target.name]: ev.target.value });
   };
 
-  const update = () => {};
+  const update = async (ev) => {
+    ev.preventDefault();
+    await dispatch(updateAuth(account));
+    navigate(`/users/${auth.id}`);
+  };
 
   return (
     <form onSubmit={update}>
@@ -40,9 +46,10 @@ const UpdateAcc = () => {
       />
       <input
         placeholder="password"
-        value={account.password ? account.password : ""}
+        value={account.password}
         name="password"
         onChange={onChange}
+        type="password"
       />
       <input
         type="text"
@@ -52,6 +59,7 @@ const UpdateAcc = () => {
         onChange={onChange}
       />
       {/* <input placeholder="avatar" value={} name="" onChange={}/> */}
+      <button> update </button>
     </form>
   );
 };
