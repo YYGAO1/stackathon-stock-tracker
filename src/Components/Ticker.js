@@ -1,7 +1,13 @@
 import React, { useEffect, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { addToWatchList, fetchStockQuotes, fetchTicker } from "../store";
+import {
+  addToWatchList,
+  fetchAggregates,
+  fetchStockQuotes,
+  fetchTicker,
+  fetchTickerNews,
+} from "../store";
 import StockChart from "./StockChart";
 import dayjs from "dayjs";
 
@@ -13,15 +19,16 @@ const Ticker = () => {
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(fetchTicker(stocksTicker));
-  //   dispatch(fetchStockQuotes(stocksTicker));
-  //   dispatch(fetchTickerNews(stocksTicker));
-  // }, []);
+  useEffect(() => {
+    dispatch(fetchTicker(stocksTicker));
+    dispatch(fetchStockQuotes(stocksTicker));
+    dispatch(fetchTickerNews(stocksTicker));
+    // dispatch(fetchAggregates());
+  }, []);
 
   const tickerData = ticker.results ? ticker.results : "";
   const address = tickerData.address ? tickerData.address : "";
-  const _stockData = stockData ? stockData : null;
+  // const _stockData = stockData ? stockData : null;
   const stockNews = news.results;
 
   const addToList = async (stock) => {
@@ -46,7 +53,7 @@ const Ticker = () => {
       {stockData.data ? (
         <h2>
           {" "}
-          {stockData.data[0]
+          {stockData.data[0].price
             ? stockData.data[0].price.toLocaleString("en-US", {
                 style: "currency",
                 currency: "USD",

@@ -5,7 +5,7 @@ const stockData = (state = [], action) => {
   if (action.type === "FETCH_STOCK_QUOTE") {
     return action.quotes;
   }
-  if (action.type === "FETCH_STOCK_QUOTE") {
+  if (action.type === "FETCH_TRENDING") {
     return action.trending;
   }
   return state;
@@ -20,10 +20,10 @@ export const fetchStockQuotes = (stocksTicker) => {
   };
 };
 
-export const fetchTrending = () => {
+export const fetchTrending = (from) => {
   return async (dispatch) => {
     const response = await axios.get(
-      `https://api.stockdata.org/v1/news/stats/trending?exchanges=nyse,nasdaq&api_token=${STOCKDATA_API_KEY}`
+      `https://api.stockdata.org/v1/news/stats/trending?exchanges=nyse,nasdaq&published_after=${from}&group_by=symbol&api_token=${STOCKDATA_API_KEY}`
     );
     dispatch({ type: "FETCH_TRENDING", trending: response.data });
   };
