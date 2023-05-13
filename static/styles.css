@@ -48,7 +48,7 @@ nav {
 }
 
 .stockExchanges {
-  animation: slide 8s linear infinite;
+  animation: slide 10s linear infinite;
   border-color: #bf9460;
   display: flex;
   justify-content: space-around;
