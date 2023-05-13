@@ -12,7 +12,7 @@ import {
 import { fetchTickerNews } from "../store/news";
 
 const Tickers = () => {
-  const { tickers } = useSelector((state) => state);
+  const { auth, tickers } = useSelector((state) => state);
   const { num } = useParams();
 
   const dispatch = useDispatch();
@@ -54,7 +54,10 @@ const Tickers = () => {
                     {stock.name}{" "}
                   </Link>{" "}
                   ({stock.ticker}){" "}
-                  <button onClick={() => addToList(stock)}>
+                  <button
+                    disabled={auth.id ? null : "disabled"}
+                    onClick={() => addToList(stock)}
+                  >
                     Add to WatchList
                   </button>
                 </li>

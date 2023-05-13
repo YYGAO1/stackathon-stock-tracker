@@ -6,7 +6,9 @@ import StockChart from "./StockChart";
 import dayjs from "dayjs";
 
 const Ticker = () => {
-  const { ticker, stockData, news, aggregates } = useSelector((state) => state);
+  const { auth, ticker, stockData, news, aggregates } = useSelector(
+    (state) => state
+  );
   const { stocksTicker } = useParams();
 
   const dispatch = useDispatch();
@@ -53,7 +55,12 @@ const Ticker = () => {
         </h2>
       ) : null}
       {/* stockData.data[0] ? "$" + stockData.data[0].price : "" */}
-      <button onClick={() => addToList(tickerData)}>Add to WatchList</button>
+      <button
+        disabled={auth.id ? null : "disabled"}
+        onClick={() => addToList(tickerData)}
+      >
+        Add to WatchList
+      </button>
       <div>
         {address ? (
           <ul>
