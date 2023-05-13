@@ -1,15 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  LineChart,
-  Line,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ComposedChart,
-  Bar,
-} from "recharts";
+import { Line, XAxis, YAxis, Tooltip, ComposedChart, Bar } from "recharts";
 import { fetchAggregates } from "../store";
 import dayjs from "dayjs";
 
@@ -52,6 +43,7 @@ const StockChart = ({ stocksTicker }) => {
 
   return (
     <ComposedChart
+      className="barGraph"
       width={750}
       height={250}
       data={data}

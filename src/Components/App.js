@@ -10,14 +10,14 @@ import {
   fetchWatchlist,
   fetchTickerNews,
 } from "../store";
-import { Link, Route, Routes, useNavigate, useParams } from "react-router-dom";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import Tickers from "./Tickers";
 import Ticker from "./Ticker";
 import Watchlist from "./Watchlist";
 import Trending from "./TrendingStock";
 import UpdateAcc from "./UpdateAcc";
-import ProfileMenu from "./ProfileMenu";
 import Profile from "./Profile";
+import MarketStatus from "./MarketStatus";
 
 const App = () => {
   const { auth } = useSelector((state) => state);
@@ -89,12 +89,12 @@ const App = () => {
               <button onClick={() => getTicker(stocksTicker)}>Enter</button>
             </span>
           </nav>
+          <MarketStatus />
 
           <Routes>
             {" "}
             <Route path="/" element={<Trending />} />
             <Route path="/:account" element={<Login />} />
-            {/* <Route path="/signup" element={<Login />} /> */}
             <Route path="/watchlist" element={<Watchlist />} />
             <Route path="/tickers/pg/:num" element={<Tickers />} />
             <Route path="/tickers/:stocksTicker" element={<Ticker />} />

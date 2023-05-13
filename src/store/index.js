@@ -9,6 +9,7 @@ import stockData from "./stockData";
 import stocks from "./stocks";
 import news from "./news";
 import aggregates from "./aggregates";
+import marketStatus from "./marketStatus";
 
 const reducer = combineReducers({
   auth,
@@ -18,6 +19,7 @@ const reducer = combineReducers({
   stocks,
   news,
   aggregates,
+  marketStatus,
 });
 
 const store = createStore(reducer, applyMiddleware(thunk, logger));
@@ -31,3 +33,4 @@ export * from "./stockData";
 export * from "./stocks";
 export * from "./news";
 export * from "./aggregates";
+export * from "./marketStatus";

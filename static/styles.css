@@ -2,6 +2,7 @@
   font-family: "Barlow";
   text-align: center;
 }
+
 .tickerLink {
   color: black;
 }
@@ -40,4 +41,24 @@ nav {
   display: flex;
   flex-direction: row;
   justify-content: end;
+}
+
+.recharts-wrapper {
+  margin: 0 auto;
+}
+
+.stockExchanges {
+  animation: slide 8s linear infinite;
+  border-color: #bf9460;
+  display: flex;
+  justify-content: space-around;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }

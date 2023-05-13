@@ -6,7 +6,7 @@ import StockChart from "./StockChart";
 import dayjs from "dayjs";
 
 const Ticker = () => {
-  const { ticker, stockData, news } = useSelector((state) => state);
+  const { ticker, stockData, news, aggregates } = useSelector((state) => state);
   const { stocksTicker } = useParams();
 
   const dispatch = useDispatch();
@@ -45,7 +45,10 @@ const Ticker = () => {
         <h2>
           {" "}
           {stockData.data[0]
-            ? "$" + stockData.data[0].price
+            ? stockData.data[0].price.toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
+              })
             : "no price available"}
         </h2>
       ) : null}
@@ -63,7 +66,7 @@ const Ticker = () => {
           "no address available"
         )}
       </div>
-      <StockChart stocksTicker={tickerData.ticker} />
+      {aggregates ? <StockChart stocksTicker={tickerData.ticker} /> : null}
       <p>{tickerData.description}</p>
       <h3>Recent News</h3>
       <div>
