@@ -57,16 +57,16 @@ const App = () => {
       {auth.id ? (
         <Home />
       ) : (
-        <>
-          <Link to={"/login"} className="tickerLink">
+        <div className="loginSignupDiv">
+          <Link to={"/login"} className="loginSignup">
             {" "}
             Login
           </Link>{" "}
           <span>or</span>{" "}
-          <Link to={"/signup"} className="tickerLink">
+          <Link to={"/signup"} className="loginSignup">
             Sign Up
           </Link>
-        </>
+        </div>
       )}
       {
         <div>
@@ -98,7 +98,7 @@ const App = () => {
             <Route path="/watchlist" element={<Watchlist />} />
             <Route path="/tickers/pg/:num" element={<Tickers />} />
             <Route path="/tickers/:stocksTicker" element={<Ticker />} />
-            <Route path="/update" element={<UpdateAcc />} />
+            {!!auth.id && <Route path="/update" element={<UpdateAcc />} />}{" "}
             <Route path="/users/:authId" element={<Profile />} />
           </Routes>
         </div>

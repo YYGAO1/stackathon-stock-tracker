@@ -49,7 +49,7 @@ const Ticker = () => {
                 style: "currency",
                 currency: "USD",
               })
-            : "no price available"}
+            : ""}
         </h2>
       ) : null}
       {/* stockData.data[0] ? "$" + stockData.data[0].price : "" */}

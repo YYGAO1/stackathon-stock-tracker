@@ -3,12 +3,17 @@
   text-align: center;
 }
 
-.tickerLink {
+.tickerLink,
+.loginSignup {
   color: black;
 }
 
+.loginSignupDiv {
+  text-align: right;
+}
+
 .tickerLink:hover,
-a {
+.loginSignup:hover {
   color: #bf9460;
 }
 
@@ -34,6 +39,7 @@ nav {
   display: flex;
   justify-content: space-around;
   background-color: #187fd9;
+  margin-top: 10px;
 }
 
 .searchTicker,
@@ -43,22 +49,29 @@ nav {
   justify-content: end;
 }
 
+.home {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .recharts-wrapper {
   margin: 0 auto;
 }
-
-.stockExchanges {
-  animation: slide 10s linear infinite;
-  border-color: #bf9460;
-  display: flex;
-  justify-content: space-around;
-}
-
-@keyframes slide {
-  0% {
-    transform: translateX(100%);
+@media only screen and (min-width: 768px) {
+  .stockExchanges {
+    animation: slide 10s linear infinite;
+    border-color: #bf9460;
+    display: flex;
+    justify-content: space-around;
   }
-  100% {
-    transform: translateX(-100%);
+
+  @keyframes slide {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
   }
 }

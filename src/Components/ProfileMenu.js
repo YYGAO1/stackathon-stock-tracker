@@ -24,6 +24,7 @@ export default function ProfileMenu() {
   const logOut = () => {
     handleClose();
     dispatch(logout());
+    navigate("/");
   };
 
   const editAcc = () => {
