@@ -16,8 +16,6 @@ const Trending = () => {
     dispatch(fetchTrending(from));
   }, []);
 
-  console.log(stockData);
-
   const data = stockData.data ? stockData.data : null;
 
   return (

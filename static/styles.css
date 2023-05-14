@@ -58,9 +58,15 @@ nav {
 .recharts-wrapper {
   margin: 0 auto;
 }
+
+.hodl {
+  font-size: 42px;
+  margin-bottom: auto;
+}
+
 @media only screen and (min-width: 768px) {
   .stockExchanges {
-    animation: slide 10s linear infinite;
+    animation: slide 15s linear infinite;
     border-color: #bf9460;
     display: flex;
     justify-content: space-around;

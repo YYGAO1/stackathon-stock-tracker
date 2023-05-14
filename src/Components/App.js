@@ -53,7 +53,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>HODL</h1>
+      <h1 className="hodl">HODL</h1>
       {auth.id ? (
         <Home />
       ) : (
