@@ -8,10 +8,8 @@ const Profile = () => {
 
   return (
     <>
-      <h2>
-        {auth.username}
-        {auth.avatar}
-      </h2>
+      <div> {auth.avatar ? <img src={auth.avatar} /> : "no avatar yet!"}</div>
+      <h2>{auth.username}</h2>
       <p>{auth.about}</p>
     </>
   );

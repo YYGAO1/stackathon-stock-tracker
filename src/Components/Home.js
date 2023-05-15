@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store";
 import Trending from "./TrendingStock";
-import ProfileMenu from "./ProfileMenu";
+import ProfileMenu from "./Dashboard";
 import { Typography } from "@mui/material";
 
 const Home = () => {
