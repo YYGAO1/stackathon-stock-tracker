@@ -68,9 +68,8 @@ const UpdateAcc = () => {
         type="password"
       />
       <label>About</label>
-      <input
+      <textarea
         type="text"
-        placeholder="about"
         value={account.about ? account.about : ""}
         name="about"
         onChange={onChange}
