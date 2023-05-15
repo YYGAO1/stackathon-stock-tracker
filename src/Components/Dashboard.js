@@ -5,8 +5,9 @@ import MenuItem from "@mui/material/MenuItem";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store";
+import { Avatar } from "@mui/material";
 
-export default function ProfileMenu() {
+export default function Dashboard() {
   const { auth } = useSelector((state) => state);
 
   const dispatch = useDispatch();
@@ -39,15 +40,15 @@ export default function ProfileMenu() {
 
   return (
     <div className="profileMenu">
-      <Button
+      <Avatar
         id="basic-button"
         aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-      >
-        Dashboard
-      </Button>
+        alt="avatar"
+        src={auth.avatar}
+      ></Avatar>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}

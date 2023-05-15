@@ -2,8 +2,8 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store";
 import Trending from "./TrendingStock";
-import ProfileMenu from "./Dashboard";
 import { Typography } from "@mui/material";
+import Dashboard from "./Dashboard";
 
 const Home = () => {
   const { auth } = useSelector((state) => state);
@@ -19,7 +19,7 @@ const Home = () => {
         >
           Welcome {auth.username}!!
         </Typography>{" "}
-        <ProfileMenu />
+        <Dashboard />
       </div>
       {/* <Trending /> */}
     </div>
