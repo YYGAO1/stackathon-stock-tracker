@@ -21,10 +21,12 @@ const UpdateAcc = () => {
     ref.current.addEventListener("change", (ev) => {
       const file = ev.target.files[0];
       const reader = new FileReader();
-      console.log(reader);
       reader.readAsDataURL(file);
       reader.addEventListener("load", () => [
-        setAccount((currentVal) => ({ ...currentVal, avatar: reader.result })),
+        setAccount((currentVal) => ({
+          ...currentVal,
+          avatar: reader.result || null,
+        })),
       ]);
     });
   }, [ref]);
@@ -35,7 +37,7 @@ const UpdateAcc = () => {
         username: auth.username,
         password: auth.password,
         about: auth.about ? auth.about : "",
-        avatar: auth.avatar ? auth.about : "",
+        avatar: auth.avatar ? auth.avatar : "",
       });
     }
   }, [auth]);

@@ -50,7 +50,7 @@ const User = conn.define("user", {
       if (data.startsWith(prefix_JPEG || prefix_PNG || prefix_JPG)) {
         return data;
       }
-      return `${prefix}${data}`;
+      return `${prefix_JPEG || prefix_PNG || prefix_JPG}${data}`;
     },
   },
   about: {
