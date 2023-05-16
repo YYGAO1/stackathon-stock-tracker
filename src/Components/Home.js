@@ -16,6 +16,7 @@ const Home = () => {
           variant="button"
           style={{ textAlign: "left", display: "flex" }}
           className="welcomeMessage"
+          sx={{ fontFamily: "Barlow" }}
         >
           Welcome {auth.username}!!
         </Typography>{" "}

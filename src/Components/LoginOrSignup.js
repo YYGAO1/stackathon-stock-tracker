@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { attemptLogin, register } from "../store";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
 const Login = () => {
@@ -12,6 +12,7 @@ const Login = () => {
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
+    admin: false,
   });
 
   const onChange = (ev) => {

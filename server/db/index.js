@@ -11,7 +11,7 @@ const syncAndSeed = async () => {
     User.create({ username: "moe", password: "123" }),
     User.create({ username: "lucy", password: "123" }),
     User.create({ username: "larry", password: "123" }),
-    User.create({ username: "ethyl", password: "123" }),
+    User.create({ username: "ethyl", password: "123", isAdmin: true }),
   ]);
 
   return {

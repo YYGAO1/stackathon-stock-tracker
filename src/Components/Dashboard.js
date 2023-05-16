@@ -58,9 +58,15 @@ export default function Dashboard() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={profile}>Profile</MenuItem>
-        <MenuItem onClick={editAcc}>Edit Account</MenuItem>
-        <MenuItem onClick={logOut}>Logout</MenuItem>
+        <MenuItem onClick={profile} sx={{ fontFamily: "Barlow" }}>
+          Profile
+        </MenuItem>
+        <MenuItem onClick={editAcc} sx={{ fontFamily: "Barlow" }}>
+          Edit Account
+        </MenuItem>
+        <MenuItem onClick={logOut} sx={{ fontFamily: "Barlow" }}>
+          Logout
+        </MenuItem>
       </Menu>
     </div>
   );

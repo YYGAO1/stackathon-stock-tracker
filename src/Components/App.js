@@ -19,6 +19,9 @@ import UpdateAcc from "./UpdateAcc";
 import Profile from "./Profile";
 import MarketStatus from "./MarketStatus";
 import StockNote from "./StockNote";
+import Admin from "./Admin";
+import CreateAcc from "./CreateAcc";
+import EditUserAcc from "./EditUserAcc";
 
 const App = () => {
   const { auth } = useSelector((state) => state);
@@ -54,7 +57,11 @@ const App = () => {
 
   return (
     <div>
-      <h1 className="hodl">HODL</h1>
+      <h1 className="hodl">
+        <Link to="/" className="homePage">
+          HODL
+        </Link>
+      </h1>
       {auth.id ? (
         <Home />
       ) : (
@@ -72,15 +79,16 @@ const App = () => {
       {
         <div>
           <nav>
-            <Link to="/">Home</Link>
+            <Link to="/">HOME</Link>
             <Link
               to="/tickers/pg/1"
               // refreshs the state
               onClick={async () => dispatch(fetchTickers())}
             >
-              Stocks
+              STOCKS
             </Link>{" "}
-            {!!auth.id && <Link to={"/watchlist"}>Watchlist</Link>}
+            {!!auth.id && <Link to={"/watchlist"}>WATCHLIST</Link>}
+            {auth.isAdmin && <Admin />}
             <span className="searchTicker">
               <input
                 placeholder="ticker"
@@ -95,6 +103,8 @@ const App = () => {
           <Routes>
             {" "}
             <Route path="/" element={<Trending />} />
+            <Route path="/admin/create" element={<CreateAcc />} />
+            {/* <Route path="/admin/edit" element={<EditUserAcc />} /> */}
             <Route path="/:account" element={<Login />} />
             <Route path="/watchlist" element={<Watchlist />} />
             <Route path="/watchlist/edit/:id" element={<StockNote />} />

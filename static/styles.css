@@ -4,7 +4,8 @@
 }
 
 .tickerLink,
-.loginSignup {
+.loginSignup,
+.homePage {
   color: black;
 }
 
@@ -40,6 +41,8 @@ nav {
   justify-content: space-around;
   background-color: #187fd9;
   margin-top: 10px;
+  align-items: center;
+  font-size: 14px;
 }
 
 .searchTicker,

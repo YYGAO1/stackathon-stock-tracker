@@ -39,7 +39,7 @@ export const updateAuth = (auth) => {
         authorization: token,
       },
     });
-    dispatch({ type: "SET_AUTH", auth: response.data });
+    dispatch({ type: "SET_AUTH", auth: response.data })
   };
 };
 

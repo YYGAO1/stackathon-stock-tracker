@@ -12,5 +12,6 @@ app.get("/", (req, res) =>
 
 app.use("/api/auth", require("./api/auth"));
 app.use("/api/watchlist", require("./api/watchlist"));
+app.use("/api/admin", require("./api/admin"));
 
 module.exports = app;
