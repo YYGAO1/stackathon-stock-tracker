@@ -91,6 +91,19 @@ User.prototype.getWatchlist = async function () {
   return watchlist;
 };
 
+User.prototype.updateStock = async function (_stock) {
+  let stock = await conn.models.stock.findOne({
+    where: {
+      userId: this.id,
+      ticker: _stock.ticker,
+    },
+  });
+  if (stock) {
+    await stock.update(_stock);
+  }
+  return stock;
+};
+
 User.prototype.removeFromWatchList = async function (_stock) {
   let stock = await conn.models.stock.findOne({
     where: {

@@ -10,6 +10,16 @@ const stocks = (state = [], action) => {
   if (action.type === "REMOVE_FROM_WATCHLIST") {
     return state.filter((_stock) => _stock.id !== action.stock.id);
   }
+
+  if (action.type === "UPDATE_STOCKNOTE") {
+    state = state.map((stock) => {
+      if (stock.id === action.stock.id) {
+        return action.stock;
+      }
+      return stock;
+    });
+  }
+
   return state;
 };
 
@@ -22,6 +32,18 @@ export const fetchWatchlist = () => {
       },
     });
     dispatch({ type: "SET_WATCHLIST", watchlist: response.data });
+  };
+};
+
+export const updateStockNote = (stock) => {
+  return async (dispatch) => {
+    const token = window.localStorage.getItem("token");
+    const response = await axios.put(`/api/watchlist/edit/${stock.id}`, stock, {
+      headers: {
+        authorization: token,
+      },
+    });
+    dispatch({ type: "UPDATE_STOCKNOTE", stock: response.data });
   };
 };
 

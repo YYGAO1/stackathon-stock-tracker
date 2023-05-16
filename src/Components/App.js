@@ -18,6 +18,7 @@ import Trending from "./TrendingStock";
 import UpdateAcc from "./UpdateAcc";
 import Profile from "./Profile";
 import MarketStatus from "./MarketStatus";
+import StockNote from "./StockNote";
 
 const App = () => {
   const { auth } = useSelector((state) => state);
@@ -96,6 +97,7 @@ const App = () => {
             <Route path="/" element={<Trending />} />
             <Route path="/:account" element={<Login />} />
             <Route path="/watchlist" element={<Watchlist />} />
+            <Route path="/watchlist/edit/:id" element={<StockNote />} />
             <Route path="/tickers/pg/:num" element={<Tickers />} />
             <Route path="/tickers/:stocksTicker" element={<Ticker />} />
             {!!auth.id && <Route path="/update" element={<UpdateAcc />} />}{" "}

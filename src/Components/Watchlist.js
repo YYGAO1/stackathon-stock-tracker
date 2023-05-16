@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchWatchlist, removeFromWatchList } from "../store";
+import { fetchWatchlist, removeFromWatchList, updateStockNote } from "../store";
 import { Link, useNavigate } from "react-router-dom";
+import StockNote from "./StockNote";
 
 const Watchlist = () => {
   const { stocks, stockData } = useSelector((state) => state);
@@ -14,20 +15,36 @@ const Watchlist = () => {
     navigate("/watchlist");
   };
 
+  const update = (stock) => {
+    navigate(`/watchlist/edit/${stock.id}`);
+  };
+
   return (
     <>
       <ul>
-        {stocks.map((stock) => {
-          return (
-            <li key={stock.ticker}>
-              {stock.name}{" "}
-              <Link className="tickerLink" to={`/tickers/${stock.ticker}`}>
-                ({stock.ticker})
-              </Link>{" "}
-              <button onClick={() => remove(stock)}>x</button>
-            </li>
-          );
-        })}
+        {stocks
+          ? stocks.map((stock) => {
+              return (
+                <li key={stock.ticker}>
+                  {stock.name}{" "}
+                  <Link className="tickerLink" to={`/tickers/${stock.ticker}`}>
+                    ({stock.ticker})
+                  </Link>{" "}
+                  <button onClick={() => remove(stock)}>x</button>
+                  <ul>
+                    {stock.note ? (
+                      <li key={stock.note}>
+                        {stock.note}{" "}
+                        <button onClick={() => update(stock)}>edit note</button>
+                      </li>
+                    ) : (
+                      <button onClick={() => update(stock)}>add note</button>
+                    )}
+                  </ul>
+                </li>
+              );
+            })
+          : null}
       </ul>
     </>
   );

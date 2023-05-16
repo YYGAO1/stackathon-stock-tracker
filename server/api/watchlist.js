@@ -21,6 +21,15 @@ app.post("/", isLoggedIn, async (req, res, next) => {
   }
 });
 
+app.put("/edit/:id", isLoggedIn, async (req, res, next) => {
+  try {
+    const user = req.user;
+    res.send(await user.updateStock(req.body));
+  } catch (ex) {
+    next(ex);
+  }
+});
+
 app.put("/:id", isLoggedIn, async (req, res, next) => {
   try {
     const user = req.user;
