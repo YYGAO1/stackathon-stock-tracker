@@ -43,10 +43,10 @@ const Watchlist = () => {
                   key={stock.ticker}
                   sx={{ alignContent: "center" }}
                 >
-                  {stock.name}{" "}
                   <Link className="tickerLink" to={`/tickers/${stock.ticker}`}>
-                    ({stock.ticker})
+                    {stock.name}
                   </Link>{" "}
+                  ({stock.ticker}){" "}
                   <Button onClick={() => remove(stock)}>x</Button>
                   <ListItemText>
                     {stock.note ? (
