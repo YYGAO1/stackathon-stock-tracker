@@ -22,6 +22,8 @@ import StockNote from "./StockNote";
 import Admin from "./Admin";
 import CreateAcc from "./CreateAcc";
 import EditUserAcc from "./EditUserAcc";
+import Placeholder from "./Placeholder";
+import { Button } from "@mui/material";
 
 const App = () => {
   const { auth } = useSelector((state) => state);
@@ -79,7 +81,7 @@ const App = () => {
       {
         <div>
           <nav>
-            <Link to="/">HOME</Link>
+            {/* <Link to="/">HOME</Link> */}
             <Link
               to="/tickers/pg/1"
               // refreshs the state
@@ -99,12 +101,15 @@ const App = () => {
             </span>
           </nav>
           <MarketStatus />
-
           <Routes>
             {" "}
             <Route path="/" element={<Trending />} />
-            <Route path="/admin/create" element={<CreateAcc />} />
+            {!!auth.isAdmin && (
+              <Route path="/admin/create" element={<CreateAcc />} />
+            )}{" "}
             {/* <Route path="/admin/edit" element={<EditUserAcc />} /> */}
+            <Route path="/aboutus" element={<Placeholder />} />
+            <Route path="/contactus" element={<Placeholder />} />
             <Route path="/:account" element={<Login />} />
             <Route path="/watchlist" element={<Watchlist />} />
             <Route path="/watchlist/edit/:id" element={<StockNote />} />
@@ -115,6 +120,19 @@ const App = () => {
           </Routes>
         </div>
       }
+      <footer>
+        <nav
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "baseline",
+            padding: "10px 30px",
+          }}
+        >
+          <Link to="/aboutus">About Us</Link>
+          <Link to="/contactus">Contact Us</Link>
+        </nav>
+      </footer>
     </div>
   );
 };

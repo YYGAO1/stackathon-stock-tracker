@@ -36,10 +36,11 @@ form > * {
   margin: 1rem;
 }
 
-nav {
+nav,
+menuitem {
   display: flex;
   justify-content: space-around;
-  background-color: #187fd9;
+  background-color: #3e608c;
   margin-top: 10px;
   align-items: center;
   font-size: 14px;

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAuth } from "../store";
 import { useNavigate } from "react-router-dom";
+import { Box, Button, TextField } from "@mui/material";
 
 const UpdateAcc = () => {
   const { auth } = useSelector((state) => state);
@@ -25,7 +26,7 @@ const UpdateAcc = () => {
       reader.addEventListener("load", () => [
         setAccount((currentVal) => ({
           ...currentVal,
-          avatar: reader.result || null,
+          avatar: reader.result,
         })),
       ]);
     });
@@ -53,16 +54,20 @@ const UpdateAcc = () => {
   };
 
   return (
-    <form onSubmit={update}>
+    <form
+      component="form"
+      onSubmit={update}
+      sx={{ display: "flex", flexDirection: "column" }}
+    >
       <label>Username</label>
-      <input
+      <TextField
         placeholder="username"
         value={account.username}
         name="username"
         onChange={onChange}
       />
       <label>Password</label>
-      <input
+      <TextField
         placeholder="password"
         value={account.password}
         name="password"
@@ -70,15 +75,16 @@ const UpdateAcc = () => {
         type="password"
       />
       <label>About</label>
-      <textarea
+      <TextField
         type="text"
+        multiline
         value={account.about ? account.about : ""}
         name="about"
         onChange={onChange}
       />
       <label>Avatar (PNG, JPEG, JPG only)</label>
       <input type="file" ref={ref} />
-      <button> update </button>
+      <button variant="outlined"> update </button>
     </form>
   );
 };

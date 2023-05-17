@@ -3,6 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchWatchlist, removeFromWatchList, updateStockNote } from "../store";
 import { Link, useNavigate } from "react-router-dom";
 import StockNote from "./StockNote";
+import {
+  Button,
+  ListItem,
+  ListItemText,
+  Menu,
+  MenuItem,
+  MenuList,
+} from "@mui/material";
 
 const Watchlist = () => {
   const { stocks, stockData } = useSelector((state) => state);
@@ -21,31 +29,43 @@ const Watchlist = () => {
 
   return (
     <>
-      <ul>
+      <ListItem
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
         {stocks
           ? stocks.map((stock) => {
               return (
-                <li key={stock.ticker}>
+                <ListItemText
+                  key={stock.ticker}
+                  sx={{ alignContent: "center" }}
+                >
                   {stock.name}{" "}
                   <Link className="tickerLink" to={`/tickers/${stock.ticker}`}>
                     ({stock.ticker})
                   </Link>{" "}
-                  <button onClick={() => remove(stock)}>x</button>
-                  <ul>
+                  <Button onClick={() => remove(stock)}>x</Button>
+                  <ListItemText>
                     {stock.note ? (
-                      <li key={stock.note}>
+                      <ListItemText
+                        key={stock.note}
+                        sx={{ alignItems: "center", justifyContent: "center" }}
+                      >
                         {stock.note}{" "}
-                        <button onClick={() => update(stock)}>edit note</button>
-                      </li>
+                        <Button onClick={() => update(stock)}>edit note</Button>
+                      </ListItemText>
                     ) : (
-                      <button onClick={() => update(stock)}>add note</button>
+                      <Button onClick={() => update(stock)}>add note</Button>
                     )}
-                  </ul>
-                </li>
+                  </ListItemText>
+                </ListItemText>
               );
             })
           : null}
-      </ul>
+      </ListItem>
     </>
   );
 };

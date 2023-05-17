@@ -10,6 +10,7 @@ import {
   fetchTickers,
 } from "../store";
 import { fetchTickerNews } from "../store/news";
+import { Button, ListItem, ListItemText } from "@mui/material";
 
 const Tickers = () => {
   const { auth, tickers } = useSelector((state) => state);
@@ -41,11 +42,17 @@ const Tickers = () => {
 
   return (
     <>
-      <ul>
+      <ListItem
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
         {tickers
           ? tickers.results.map((stock) => {
               return (
-                <li key={stock.ticker}>
+                <ListItemText key={stock.ticker}>
                   <Link
                     className="tickerLink"
                     to={`/tickers/${stock.ticker}`}
@@ -54,19 +61,19 @@ const Tickers = () => {
                     {stock.name}{" "}
                   </Link>{" "}
                   ({stock.ticker}){" "}
-                  <button
+                  <Button
                     disabled={auth.id ? null : "disabled"}
                     onClick={() => addToList(stock)}
                   >
                     Add to WatchList
-                  </button>
-                </li>
+                  </Button>
+                </ListItemText>
               );
             })
           : null}
         {/* <Link to={`/tickers/pg/${num * 1 + 1}`}>Next Page</Link> */}
-        <button onClick={() => nextPage(tickers.next_url)}>Next Page</button>
-      </ul>
+        <Button onClick={() => nextPage(tickers.next_url)}>Next Page</Button>
+      </ListItem>
     </>
   );
 };

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchStockQuotes, fetchTrending } from "../store";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+import { List, ListItem } from "@mui/material";
 
 const Trending = () => {
   const { stockData } = useSelector((state) => state);
@@ -22,19 +23,29 @@ const Trending = () => {
     <>
       <h1>Trending past 24 hrs</h1>
       <div>
-        <ul>
+        <List
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           {data
             ? data.map((stock) => {
                 return (
-                  <li key={stock.key}>
+                  <ListItem
+                    key={stock.key}
+                    sx={{ display: "flex", justifyContent: "center" }}
+                  >
                     <Link to={`/tickers/${stock.key}`} className="tickerLink">
                       {stock.key}
                     </Link>
-                  </li>
+                  </ListItem>
                 );
               })
             : null}
-        </ul>
+        </List>
       </div>
     </>
   );
